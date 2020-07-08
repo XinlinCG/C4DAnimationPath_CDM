@@ -1,76 +1,56 @@
-file = open ("atomtest04.txt", "r")
+import c4d
+import math
 
-sentences = []
-keysets = []
+#Shoulder_02_XN
 
-def find_nth(haystack, needle, n):
-    start = haystack.find(needle)
-    while start >= 0 and n > 1:
-        start = haystack.find(needle, start+len(needle))
-        n -= 1
-    return start
+def main():
+    obj = op.GetObject()
+    frame = doc.GetTime().GetFrame(doc.GetFps())
+    xp = obj[c4d.ID_BASEOBJECT_REL_ROTATION,c4d.VECTOR_Z] * 180 / math.pi
+    data = obj[c4d.ID_USERDATA,1]+"\n"+ "Shoulder_02_XN" + "Frame"+str(frame) + "/" + "B_Z_rotation:"+str(xp)
+    obj[c4d.ID_USERDATA,1] = data
 
-for line in file:
-    sentences.append(line.strip())
+#Bicep_03_YN
 
-#print(sentences)
-file.close()
+def main():
+    obj = op.GetObject()
+    frame = doc.GetTime().GetFrame(doc.GetFps())
+    xp = obj[c4d.ID_BASEOBJECT_REL_ROTATION,c4d.VECTOR_Y] * 180 / math.pi
+    data = obj[c4d.ID_USERDATA,1]+"\n"+ "Bicep_03_YN" + "Frame"+str(frame) + "/" + "P_Y_rotation:"+str(xp)
+    obj[c4d.ID_USERDATA,1] = data
 
-copy_sentences = sentences.copy()
-edited_sentences = sentences.copy()
+#Forearm_04_ZN
 
-jointindicator = "dagNode {"
-jointnames = []
+def main():
+    obj = op.GetObject()
+    frame = doc.GetTime().GetFrame(doc.GetFps())
+    xp = obj[c4d.ID_BASEOBJECT_REL_ROTATION,c4d.VECTOR_Y] * 180 / math.pi
+    data = obj[c4d.ID_USERDATA,1]+"\n"+ "Forearm_04_ZN" + "Frame"+str(frame) + "/" + "P_Y_rotation:"+str(xp)
+    obj[c4d.ID_USERDATA,1] = data
 
-#print(sentences[(sentences.index("dagNode {") + 1)]) # Index of the First Joint
+#TuningFork_05_UN
 
-for i in copy_sentences: # Find Joints' names
-    if jointindicator in copy_sentences:
-        #print([(copy_sentences.index(jointindicator) + 1)])
-        jointnames.append((copy_sentences.index(jointindicator) + 1))
-        copy_sentences[copy_sentences.index(jointindicator)] = "replaced"
+def main():
+    obj = op.GetObject()
+    frame = doc.GetTime().GetFrame(doc.GetFps())
+    xp = obj[c4d.ID_BASEOBJECT_REL_ROTATION,c4d.VECTOR_Y] * 180 / math.pi
+    data = obj[c4d.ID_USERDATA,1]+"\n"+ "TuningFork_05_UN" + "Frame"+str(frame) + "/" + "P_Y_rotation:"+str(xp)
+    obj[c4d.ID_USERDATA,1] = data
 
-keysindicator = 'keys {'
-keyendindicator = "}"
+#PicassoBox_06_VN
 
-for i in copy_sentences: #Find keys of each joint
-    if keysindicator in copy_sentences:
-        key_index = copy_sentences.index(keysindicator) + 1 #first key's index -1
-        keyend_index = copy_sentences[key_index:].index(keyendindicator) + key_index
-        #print(key_index)
-        #print(keyend_index)
-        jointkeystrings = sentences[key_index:keyend_index]
-        keysets.append(jointkeystrings)
-        #print(jointkeystrings)
-        copy_sentences[copy_sentences.index(keysindicator)] = "replaced"
+def main():
+    obj = op.GetObject()
+    frame = doc.GetTime().GetFrame(doc.GetFps())
+    xp = obj[c4d.ID_BASEOBJECT_REL_ROTATION,c4d.VECTOR_X] * 180 / math.pi
+    data = obj[c4d.ID_USERDATA,1]+"\n"+ "PicassoBox_06_VN" +"Frame"+str(frame) + "/" + "H_X_rotation:"+str(xp)
+    obj[c4d.ID_USERDATA,1] = data
 
-print(keysets)
-#print(jointnames)
+#Hand_07_WN
 
-print(keysets[0])
-
-
-
-for i in jointnames:
-    print("\n")
-    print(sentences[i])
-    a = jointnames.index(i)
-    #print(keysets[a])
-    for x in keysets[a]:
-        #print(find_nth(x, " ", 2))
-
-        secondspace = find_nth(x, " ", 2)
-        x = x[0 : secondspace : ]
-
-        #x.replace()
-        print(x)
-
-
-#print(sentences)
-#print(sentences.index("dagNode {"))
-
-#print(sentences[9:])
-
-#joint1 = sentences[10]
-#print(joint1)
-
+def main():
+    obj = op.GetObject()
+    frame = doc.GetTime().GetFrame(doc.GetFps())
+    xp = obj[c4d.ID_BASEOBJECT_REL_ROTATION,c4d.VECTOR_X] * 180 / math.pi
+    data = obj[c4d.ID_USERDATA,1]+"\n"+ "Hand_07_WN" +"Frame"+str(frame) + "/" + "H_X_rotation:"+str(xp)
+    obj[c4d.ID_USERDATA,1] = data
