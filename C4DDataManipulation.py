@@ -140,7 +140,3 @@ for i in frames:
            "\"vn\":" + str(key_sequence_of_each_joint[4][i]) + "," +
            "\"wn\":" + str(key_sequence_of_each_joint[5][i]) + "}"
            )
-
-    #TESTTESTTEST
-
-    #TESTTTTEEBBAS
