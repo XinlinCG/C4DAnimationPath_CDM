@@ -19,5 +19,5 @@ def main():
 
     data = obj[c4d.ID_USERDATA, 1] + "\n" + objectname + "," + str(frame) + "," + str(xp) + "," + str(yp) + "," + str(
         zp) + "," + str(xr) + "," + str(yr) + "," + str(zr)
-    
+
     obj[c4d.ID_USERDATA, 1] = data
