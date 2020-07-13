@@ -5,12 +5,13 @@
 # yr = obj[c4d.ID_BASEOBJECT_REL_ROTATION, c4d.VECTOR_Y] * 180 / math.pi
 # zr = obj[c4d.ID_BASEOBJECT_REL_ROTATION, c4d.VECTOR_Z] * 180 / math.pi
 
-# Shoulder_02_XN
-# Bicep_03_YN
-# Forearm_04_ZN
-# TuningFork_05_UN
-# PicassoBox_06_VN
-# Hand_07_WN
+# Shoulder_02_X
+# Bicep_03_Y
+# Forearm_04_Z
+# TuningFork_05_U
+# PicassoBox_06_V
+# Hand_07_W
+# Clamps_08_T
 
 file = open("RawData.txt", "r")
 sentences = []
@@ -25,6 +26,8 @@ for line in file:
 
 file.close()
 
+
+# This function deletes repetitive elements in a list. e.g. Coordinates of the joint in the same frame
 def getUniqueItems(iterable):
     seen = set()
     result = []
@@ -34,23 +37,21 @@ def getUniqueItems(iterable):
             result.append(item)
     return result
 
-sentences = getUniqueItems(sentences)
 
+sentences = getUniqueItems(sentences)
 organized = []
 
+# This loop makes each sentence break down into smaller elements, and convert them into: int, float, string
 for line in sentences:
     splitLine = line.split(",")
     # print(splitLine)
-
     splitLine[1] = int(splitLine[1])
-
     splitLine[2] = float(splitLine[2])
     splitLine[3] = float(splitLine[3])
     splitLine[4] = float(splitLine[4])
     splitLine[5] = float(splitLine[5])
     splitLine[6] = float(splitLine[6])
     splitLine[7] = float(splitLine[7])
-
     organized.append(splitLine)
 
 Shoulder_02_XN = []
@@ -59,6 +60,7 @@ Forearm_04_ZN = []
 TuningFork_05_UN = []
 PicassoBox_06_VN = []
 Hand_07_WN = []
+Clamps_08_TN = []
 
 for list in organized:
     if list[0] == 'Shoulder_02_XN':
@@ -73,6 +75,8 @@ for list in organized:
         PicassoBox_06_VN.append(list)
     elif list[0] == 'Hand_07_WN':
         Hand_07_WN.append(list)
+    elif list[0] == 'Clamps_08_TN':
+        Clamps_08_TN.append(list)
     else:
         print("This file either contains unexpected object(joints), or the joints' names are named incorrectly")
 
@@ -84,6 +88,8 @@ alljoints.append(Forearm_04_ZN)
 alljoints.append(TuningFork_05_UN)
 alljoints.append(PicassoBox_06_VN)
 alljoints.append(Hand_07_WN)
+alljoints.append(Clamps_08_TN)
+# alljoints = [[Joint1[0:-1]][joint2[0:-1]]...[joint8[0:-1]]]
 
 for joint in alljoints:
     xp = []
@@ -117,11 +123,11 @@ for joint in alljoints:
             joint = c
     key_sequence_of_each_joint.append(joint)
 
-
-
-    print(key_sequence_of_each_joint)
-    print(" ")
-    print(len(key_sequence_of_each_joint))
+    #print(key_sequence_of_each_joint)
+    #print(" ")
+    #print(len(key_sequence_of_each_joint))
+# This loop deletes fixed coordinates(Positions and rotations) of each joint, and assign the key animation path to →
+# key_sequence_of_each_joint
 
 for i in key_sequence_of_each_joint:
     print(i)
@@ -132,13 +138,13 @@ for i in organized:
     frames = getUniqueItems(frames)
 
 for i in frames:
-    print( str(i) + "," + "{" +
-           "\"xn\":" + str(key_sequence_of_each_joint[0][i]) + "," +
-           "\"yn\":" + str(key_sequence_of_each_joint[1][i]) + "," +
-           "\"zn\":" + str(key_sequence_of_each_joint[2][i]) + "," +
-           "\"un\":" + str(key_sequence_of_each_joint[3][i]) + "," +
-           "\"vn\":" + str(key_sequence_of_each_joint[4][i]) + "," +
-           "\"wn\":" + str(key_sequence_of_each_joint[5][i]) + "}"
-           )
-
-#last Test ok
+    print(str(i) + "," + "{" +
+          "\"X\":" + str(key_sequence_of_each_joint[0][i]) + "," +
+          "\"Y\":" + str(key_sequence_of_each_joint[1][i]) + "," +
+          "\"Z\":" + str(key_sequence_of_each_joint[2][i]) + "," +
+          "\"U\":" + str(key_sequence_of_each_joint[3][i]) + "," +
+          "\"V\":" + str(key_sequence_of_each_joint[4][i]) + "," +
+          "\"W\":" + str(key_sequence_of_each_joint[5][i]) + "," +
+          "\"T\":" + str(key_sequence_of_each_joint[6][i]) + ","
+                                                             "}"
+          )
