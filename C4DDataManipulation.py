@@ -123,9 +123,9 @@ for joint in alljoints:
             joint = c
     key_sequence_of_each_joint.append(joint)
 
-    #print(key_sequence_of_each_joint)
-    #print(" ")
-    #print(len(key_sequence_of_each_joint))
+    # print(key_sequence_of_each_joint)
+    # print(" ")
+    # print(len(key_sequence_of_each_joint))
 # This loop deletes fixed coordinates(Positions and rotations) of each joint, and assign the key animation path to →
 # key_sequence_of_each_joint
 
@@ -139,12 +139,12 @@ for i in organized:
 
 for i in frames:
     print(str(i) + "," + "{" +
-          "\"X\":" + str(key_sequence_of_each_joint[0][i]) + "," +
-          "\"Y\":" + str(key_sequence_of_each_joint[1][i]) + "," +
-          "\"Z\":" + str(key_sequence_of_each_joint[2][i]) + "," +
-          "\"U\":" + str(key_sequence_of_each_joint[3][i]) + "," +
-          "\"V\":" + str(key_sequence_of_each_joint[4][i]) + "," +
-          "\"W\":" + str(key_sequence_of_each_joint[5][i]) + "," +
-          "\"T\":" + str(key_sequence_of_each_joint[6][i]) + ","
-                                                             "}"
+          "\"x\":" + str(key_sequence_of_each_joint[0][i]) + "," +
+          "\"y\":" + str(key_sequence_of_each_joint[1][i]) + "," +
+          "\"z\":" + str(key_sequence_of_each_joint[2][i]) + "," +
+          "\"u\":" + str(key_sequence_of_each_joint[3][i]) + "," +
+          "\"v\":" + str(key_sequence_of_each_joint[4][i]) + "," +
+          "\"w\":" + str(key_sequence_of_each_joint[5][i]) + "," +
+          "\"t\":" + str(key_sequence_of_each_joint[6][i]) +
+          "}"
           )
