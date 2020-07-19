@@ -12,6 +12,7 @@
 # PicassoBox_06_V
 # Hand_07_W
 # Clamps_08_T
+import numpy as np
 
 file = open("RawData.txt", "r")
 sentences = []
@@ -139,12 +140,12 @@ for i in organized:
 
 for i in frames:
     print(str(i) + "," + "{" +
-          "\"x\":" + str(key_sequence_of_each_joint[0][i]) + "," +
-          "\"y\":" + str(key_sequence_of_each_joint[1][i]) + "," +
-          "\"z\":" + str(key_sequence_of_each_joint[2][i]) + "," +
-          "\"u\":" + str(key_sequence_of_each_joint[3][i]) + "," +
-          "\"v\":" + str(key_sequence_of_each_joint[4][i]) + "," +
-          "\"w\":" + str(key_sequence_of_each_joint[5][i]) + "," +
-          "\"t\":" + str(key_sequence_of_each_joint[6][i]) +
+          "\"x\":" + str(round(key_sequence_of_each_joint[0][i], 3)) + "," +
+          "\"y\":" + str(round(key_sequence_of_each_joint[1][i] - 90.0, 3)) + "," +
+          "\"z\":" + str(round(key_sequence_of_each_joint[2][i], 3)) + "," +
+          "\"u\":" + str(round(key_sequence_of_each_joint[3][i], 3)) + "," +
+          "\"v\":" + str(round(key_sequence_of_each_joint[4][i], 3)) + "," +
+          "\"w\":" + str(round(key_sequence_of_each_joint[5][i], 3 )) + "," +
+          "\"t\":" + str(round(key_sequence_of_each_joint[6][i], 3)) +
           "}"
           )
