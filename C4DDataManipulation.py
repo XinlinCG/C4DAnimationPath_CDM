@@ -14,7 +14,8 @@
 # Clamps_08_T
 import numpy as np
 
-file = open("RawData.txt", "r")
+filename = "anim_01.txt"
+file = open(filename, "r")
 sentences = []
 frames = []
 key_sequence_of_each_joint = []
@@ -24,6 +25,7 @@ key = []
 for line in file:
     splitLine = line.split(",")
     sentences.append(line.strip())
+    # print(line)
 
 file.close()
 
@@ -45,7 +47,6 @@ organized = []
 # This loop makes each sentence break down into smaller elements, and convert them into: int, float, string
 for line in sentences:
     splitLine = line.split(",")
-    # print(splitLine)
     splitLine[1] = int(splitLine[1])
     splitLine[2] = float(splitLine[2])
     splitLine[3] = float(splitLine[3])
@@ -90,7 +91,9 @@ alljoints.append(TuningFork_05_UN)
 alljoints.append(PicassoBox_06_VN)
 alljoints.append(Hand_07_WN)
 alljoints.append(Clamps_08_TN)
+
 # alljoints = [[Joint1[0:-1]][joint2[0:-1]]...[joint8[0:-1]]]
+# print(alljoints)
 
 for joint in alljoints:
     xp = []
@@ -108,35 +111,38 @@ for joint in alljoints:
         yr.append(i[6])
         zr.append(i[7])
 
-    allaxes = []
-
-    allaxes.append(xp)
-    allaxes.append(yp)
-    allaxes.append(zp)
-    allaxes.append(xr)
-    allaxes.append(yr)
-    allaxes.append(zr)
+    allaxes = [xp, yp, zp, xr, yr, zr]
+    #print(allaxes)
 
     for c in allaxes:
-        if len(getUniqueItems(c)) <= 1:
-            c = []
+
         if len(getUniqueItems(c)) > 1:
             joint = c
+            #print(joint)
+            break
+
+        if len(getUniqueItems(c)) == 1:
+            joint = c
+
     key_sequence_of_each_joint.append(joint)
 
-    # print(key_sequence_of_each_joint)
+print(key_sequence_of_each_joint)
     # print(" ")
-    # print(len(key_sequence_of_each_joint))
+print(len(key_sequence_of_each_joint))
 # This loop deletes fixed coordinates(Positions and rotations) of each joint, and assign the key animation path to →
 # key_sequence_of_each_joint
 
-for i in key_sequence_of_each_joint:
-    print(i)
-    print(" ")
+# for i in key_sequence_of_each_joint:
+# print(i)
+# print(" ")
 
 for i in organized:
     frames.append(i[1])
     frames = getUniqueItems(frames)
+
+# print(key_sequence_of_each_joint[6][0])
+
+exportedcommands = open('batch_anim_01.txt', 'w+')
 
 for i in frames:
     print(str(i) + "," + "{" +
@@ -145,7 +151,18 @@ for i in frames:
           "\"z\":" + str(round(key_sequence_of_each_joint[2][i], 3)) + "," +
           "\"u\":" + str(round(key_sequence_of_each_joint[3][i], 3)) + "," +
           "\"v\":" + str(round(key_sequence_of_each_joint[4][i], 3)) + "," +
-          "\"w\":" + str(round(key_sequence_of_each_joint[5][i], 3 )) + "," +
+          "\"w\":" + str(round(key_sequence_of_each_joint[5][i], 3)) + "," +
           "\"t\":" + str(round(key_sequence_of_each_joint[6][i], 3)) +
           "}"
           )
+    exportedcommands.write("{" +
+          "\"x\":" + str(round(key_sequence_of_each_joint[0][i], 3)) + "," +
+          "\"y\":" + str(round(key_sequence_of_each_joint[1][i] - 90.0, 3)) + "," +
+          "\"z\":" + str(round(key_sequence_of_each_joint[2][i], 3)) + "," +
+          "\"u\":" + str(round(key_sequence_of_each_joint[3][i], 3)) + "," +
+          "\"v\":" + str(round(key_sequence_of_each_joint[4][i], 3)) + "," +
+          "\"w\":" + str(round(key_sequence_of_each_joint[5][i], 3)) + "," +
+          "\"t\":" + str(round(key_sequence_of_each_joint[6][i], 3)) +
+          "}"+ '\n')
+
+exportedcommands.close()
