@@ -5,6 +5,8 @@
 # yr = obj[c4d.ID_BASEOBJECT_REL_ROTATION, c4d.VECTOR_Y] * 180 / math.pi
 # zr = obj[c4d.ID_BASEOBJECT_REL_ROTATION, c4d.VECTOR_Z] * 180 / math.pi
 
+# The followings are the current joints attached to Sixi
+# The joints in C4D should also be renamed to the exact same names
 # Shoulder_02_X
 # Bicep_03_Y
 # Forearm_04_Z
@@ -12,10 +14,14 @@
 # PicassoBox_06_V
 # Hand_07_W
 # Clamps_08_T
+
+
 import numpy as np
 
-filename = "anim_01.txt"
-file = open(filename, "r")
+rawDataFile = "anim_01.txt"  # Replace the string with the name of the exported file which contains data from c4d
+exportedDataFile = "batch_anim_01.txt" # Exported data will be stored in this file
+
+file = open(rawDataFile, "r")
 sentences = []
 frames = []
 key_sequence_of_each_joint = []
@@ -112,13 +118,13 @@ for joint in alljoints:
         zr.append(i[7])
 
     allaxes = [xp, yp, zp, xr, yr, zr]
-    #print(allaxes)
+    # print(allaxes)
 
     for c in allaxes:
 
         if len(getUniqueItems(c)) > 1:
             joint = c
-            #print(joint)
+            # print(joint)
             break
 
         if len(getUniqueItems(c)) == 1:
@@ -126,9 +132,9 @@ for joint in alljoints:
 
     key_sequence_of_each_joint.append(joint)
 
-print(key_sequence_of_each_joint)
-    # print(" ")
-print(len(key_sequence_of_each_joint))
+#print(key_sequence_of_each_joint)
+# print(" ")
+#print(len(key_sequence_of_each_joint))
 # This loop deletes fixed coordinates(Positions and rotations) of each joint, and assign the key animation path to →
 # key_sequence_of_each_joint
 
@@ -142,7 +148,7 @@ for i in organized:
 
 # print(key_sequence_of_each_joint[6][0])
 
-exportedcommands = open('batch_anim_01.txt', 'w+')
+exportedcommands = open(exportedDataFile, 'w+')
 exportedcommands.truncate(0)
 
 exportedcommands.write('[' + '\n')
@@ -170,15 +176,14 @@ for i in frames:
                                "}" + '\n')
     else:
         exportedcommands.write("{" +
-          "\"x\":" + str(round(key_sequence_of_each_joint[0][i], 3)) + "," +
-          "\"y\":" + str(round(key_sequence_of_each_joint[1][i] - 90.0, 3)) + "," +
-          "\"z\":" + str(round(key_sequence_of_each_joint[2][i], 3)) + "," +
-          "\"u\":" + str(round(key_sequence_of_each_joint[3][i], 3)) + "," +
-          "\"v\":" + str(round(key_sequence_of_each_joint[4][i], 3)) + "," +
-          "\"w\":" + str(round(key_sequence_of_each_joint[5][i], 3)) + "," +
-          "\"t\":" + str(round(key_sequence_of_each_joint[6][i], 3)) +
-          "}"+ ',' + '\n')
+                               "\"x\":" + str(round(key_sequence_of_each_joint[0][i], 3)) + "," +
+                               "\"y\":" + str(round(key_sequence_of_each_joint[1][i] - 90.0, 3)) + "," +
+                               "\"z\":" + str(round(key_sequence_of_each_joint[2][i], 3)) + "," +
+                               "\"u\":" + str(round(key_sequence_of_each_joint[3][i], 3)) + "," +
+                               "\"v\":" + str(round(key_sequence_of_each_joint[4][i], 3)) + "," +
+                               "\"w\":" + str(round(key_sequence_of_each_joint[5][i], 3)) + "," +
+                               "\"t\":" + str(round(key_sequence_of_each_joint[6][i], 3)) +
+                               "}" + ',' + '\n')
 
 exportedcommands.write(']')
-
 exportedcommands.close()
