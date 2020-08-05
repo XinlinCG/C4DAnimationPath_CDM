@@ -143,6 +143,9 @@ for i in organized:
 # print(key_sequence_of_each_joint[6][0])
 
 exportedcommands = open('batch_anim_01.txt', 'w+')
+exportedcommands.truncate(0)
+
+exportedcommands.write('[' + '\n')
 
 for i in frames:
     print(str(i) + "," + "{" +
@@ -155,7 +158,18 @@ for i in frames:
           "\"t\":" + str(round(key_sequence_of_each_joint[6][i], 3)) +
           "}"
           )
-    exportedcommands.write("{" +
+    if i == len(frames) - 1:
+        exportedcommands.write("{" +
+                               "\"x\":" + str(round(key_sequence_of_each_joint[0][i], 3)) + "," +
+                               "\"y\":" + str(round(key_sequence_of_each_joint[1][i] - 90.0, 3)) + "," +
+                               "\"z\":" + str(round(key_sequence_of_each_joint[2][i], 3)) + "," +
+                               "\"u\":" + str(round(key_sequence_of_each_joint[3][i], 3)) + "," +
+                               "\"v\":" + str(round(key_sequence_of_each_joint[4][i], 3)) + "," +
+                               "\"w\":" + str(round(key_sequence_of_each_joint[5][i], 3)) + "," +
+                               "\"t\":" + str(round(key_sequence_of_each_joint[6][i], 3)) +
+                               "}" + '\n')
+    else:
+        exportedcommands.write("{" +
           "\"x\":" + str(round(key_sequence_of_each_joint[0][i], 3)) + "," +
           "\"y\":" + str(round(key_sequence_of_each_joint[1][i] - 90.0, 3)) + "," +
           "\"z\":" + str(round(key_sequence_of_each_joint[2][i], 3)) + "," +
@@ -163,6 +177,8 @@ for i in frames:
           "\"v\":" + str(round(key_sequence_of_each_joint[4][i], 3)) + "," +
           "\"w\":" + str(round(key_sequence_of_each_joint[5][i], 3)) + "," +
           "\"t\":" + str(round(key_sequence_of_each_joint[6][i], 3)) +
-          "}"+ '\n')
+          "}"+ ',' + '\n')
+
+exportedcommands.write(']')
 
 exportedcommands.close()
