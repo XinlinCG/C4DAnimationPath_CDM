@@ -15,11 +15,8 @@
 # Hand_07_W
 # Clamps_08_T
 
-
-import numpy as np
-
 rawDataFile = "raw_anim_01.txt"  # Replace the string with the name of the exported file which contains data from c4d
-exportedDataFile = "exported_anim_01.txt" # Exported data will be stored in this file
+exportedDataFile = "exported_anim_01.txt"  # Exported data will be stored in this file
 
 file = open(rawDataFile, "r")
 sentences = []
@@ -31,7 +28,6 @@ key = []
 for line in file:
     splitLine = line.split(",")
     sentences.append(line.strip())
-    # print(line)
 
 file.close()
 
@@ -88,18 +84,7 @@ for list in organized:
     else:
         print("This file either contains unexpected object(joints), or the joints' names are named incorrectly")
 
-alljoints = []
-
-alljoints.append(Shoulder_02_XN)
-alljoints.append(Bicep_03_YN)
-alljoints.append(Forearm_04_ZN)
-alljoints.append(TuningFork_05_UN)
-alljoints.append(PicassoBox_06_VN)
-alljoints.append(Hand_07_WN)
-alljoints.append(Clamps_08_TN)
-
-# alljoints = [[Joint1[0:-1]][joint2[0:-1]]...[joint8[0:-1]]]
-# print(alljoints)
+alljoints = [Shoulder_02_XN, Bicep_03_YN, Forearm_04_ZN, TuningFork_05_UN, PicassoBox_06_VN, Hand_07_WN, Clamps_08_TN]
 
 for joint in alljoints:
     xp = []
@@ -118,13 +103,11 @@ for joint in alljoints:
         zr.append(i[7])
 
     allaxes = [xp, yp, zp, xr, yr, zr]
-    # print(allaxes)
 
     for c in allaxes:
 
         if len(getUniqueItems(c)) > 1:
             joint = c
-            # print(joint)
             break
 
         if len(getUniqueItems(c)) == 1:
@@ -132,21 +115,9 @@ for joint in alljoints:
 
     key_sequence_of_each_joint.append(joint)
 
-#print(key_sequence_of_each_joint)
-# print(" ")
-#print(len(key_sequence_of_each_joint))
-# This loop deletes fixed coordinates(Positions and rotations) of each joint, and assign the key animation path to →
-# key_sequence_of_each_joint
-
-# for i in key_sequence_of_each_joint:
-# print(i)
-# print(" ")
-
 for i in organized:
     frames.append(i[1])
     frames = getUniqueItems(frames)
-
-# print(key_sequence_of_each_joint[6][0])
 
 exportedcommands = open(exportedDataFile, 'w+')
 exportedcommands.truncate(0)
