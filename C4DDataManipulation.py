@@ -15,8 +15,8 @@
 # Hand_07_W
 # Clamps_08_T
 
-rawDataFile = "raw_anim_01.txt"  # Replace the string with the name of the exported file which contains data from c4d
-exportedDataFile = "exported_anim_01.txt"  # Exported data will be stored in this file
+rawDataFile = "CubeCatching_FromC4D.txt"  # Replace the string with the name of the exported file which contains data from c4d
+exportedDataFile = "CubeCatching_anim_02.txt"  # Exported data will be stored in this file
 
 file = open(rawDataFile, "r")
 sentences = []
